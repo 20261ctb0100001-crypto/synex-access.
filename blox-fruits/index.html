@@ -1,21 +1,129 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SYNEX • Blox Fruits Companion</title>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>SYNEX • Beli + XP</title>
 <style>
-:root{color-scheme:dark;--bg:#080b12;--panel:#111827;--line:#253247;--text:#eef4ff;--muted:#9aabc3;--cyan:#57e0d0}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#142849 0,transparent 42%),var(--bg);color:var(--text);font:15px system-ui,sans-serif}main{max-width:920px;margin:auto;padding:28px 18px 60px}.top{display:flex;justify-content:space-between;gap:12px;margin-bottom:30px}.brand{font-weight:800;letter-spacing:.18em;color:var(--cyan)}.tag{color:var(--muted);font-size:12px;border:1px solid var(--line);padding:7px 10px;border-radius:30px}h1{font-size:clamp(30px,6vw,52px);line-height:1.02;margin:0 0 12px}p{color:var(--muted);line-height:1.6}.hero{margin-bottom:24px}.hero p{max-width:620px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{background:linear-gradient(145deg,#151f31,#0e1420);border:1px solid var(--line);border-radius:18px;padding:18px}.card h2{font-size:16px;margin:0 0 14px}label{display:block;color:var(--muted);font-size:13px;margin:10px 0 6px}input,select{width:100%;background:#080e18;border:1px solid #30415a;color:var(--text);padding:12px;border-radius:10px;font:inherit}button{border:0;border-radius:11px;padding:12px 16px;background:linear-gradient(90deg,#2678e8,#31b9b0);color:#04101c;font-weight:800;cursor:pointer;margin-top:12px;width:100%}.result{font-size:19px;font-weight:750;margin:8px 0;color:var(--cyan)}.small{font-size:12px;color:var(--muted)}.route{display:grid;gap:10px}.step{padding:12px;border-radius:12px;background:#0a1220;border:1px solid var(--line)}.step b{display:block;margin-bottom:4px}.meter{height:9px;background:#26344a;border-radius:20px;overflow:hidden;margin-top:12px}.meter span{display:block;height:100%;background:linear-gradient(90deg,#347ef1,#57e0d0);width:0}footer{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
-</style></head><body><main>
-<div class="top"><div class="brand">S Y N E X</div><div class="tag">BLOX FRUITS COMPANION · BETA</div></div>
-<section class="hero"><h1>Seu próximo nível.<br><span style="color:var(--cyan)">Sem perder tempo.</span></h1><p>Um copiloto de progresso para organizar seu caminho no Blox Fruits. Ele recomenda objetivos e acompanha seu avanço — não toca no jogo, não usa exploits e não acessa sua conta.</p></section>
+:root{color-scheme:dark;--bg:#080b12;--panel:#111a29;--line:#26364d;--text:#eef4ff;--muted:#9aabc3;--cyan:#57e0d0;--blue:#438cf5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#142849 0,transparent 42%),var(--bg);color:var(--text);font:15px system-ui,sans-serif}
+main{max-width:980px;margin:auto;padding:26px 17px 54px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:30px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.2em;color:var(--cyan)}.tag{color:var(--muted);font-size:11px;border:1px solid var(--line);padding:7px 10px;border-radius:30px}
+h1{font-size:clamp(32px,6vw,54px);line-height:1.02;margin:0 0 12px}.hero{margin-bottom:24px}.hero p{max-width:680px;color:var(--muted);line-height:1.6}.accent{color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.card{background:linear-gradient(145deg,#151f31,#0e1420);border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}.card h2{font-size:16px;margin:0 0 13px}
+label{display:block;color:var(--muted);font-size:13px;margin:10px 0 6px}input{width:100%;background:#080e18;border:1px solid #30415a;color:var(--text);padding:12px;border-radius:10px;font:inherit}
+button{border:0;border-radius:11px;padding:12px 16px;background:linear-gradient(90deg,#2678e8,#31b9b0);color:#04101c;font-weight:800;cursor:pointer;margin-top:12px;width:100%}.secondary{background:#1a2940;color:var(--text);border:1px solid #354a68}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{background:#0a1220;border:1px solid var(--line);border-radius:13px;padding:13px}.stat strong{display:block;font-size:clamp(18px,4vw,24px);color:var(--cyan);overflow-wrap:anywhere}.stat span{font-size:12px;color:var(--muted)}
+.meter{height:9px;background:#26344a;border-radius:20px;overflow:hidden;margin-top:12px}.meter span{display:block;height:100%;background:linear-gradient(90deg,#347ef1,#57e0d0);width:0;transition:width .2s}
+.small{font-size:12px;color:var(--muted);line-height:1.55}.route{display:grid;gap:10px}.step{padding:13px;border-radius:12px;background:#0a1220;border:1px solid var(--line)}.step b{display:block;margin-bottom:5px}.reward{color:var(--cyan);font-size:13px;margin-top:5px}
+.pill{display:inline-block;border:1px solid #35506c;border-radius:30px;padding:4px 8px;color:#b8c9e2;font-size:11px;margin:2px 4px 2px 0}
+.full{grid-column:1/-1}.notice{border-left:3px solid var(--cyan);padding:10px 12px;background:#0b1724;border-radius:0 10px 10px 0;color:#b9c8dc;font-size:13px;line-height:1.55}
+footer{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
+@media(max-width:420px){main{padding-left:13px;padding-right:13px}.card{padding:15px}.stats{gap:7px}}
+</style>
+</head>
+<body><main>
+<div class="top"><div class="brand">S Y N E X</div><div class="tag">BLOX FRUITS · BELI + XP</div></div>
+<section class="hero">
+<h1>Farm inteligente.<br><span class="accent">Beli e XP.</span></h1>
+<p>Seu painel para acompanhar o dinheiro e os níveis até o Segundo Mar. Veja a missão indicada para seu nível, registre seus ganhos e acompanhe suas metas.</p>
+</section>
 <div class="grid">
-<section class="card"><h2>Seu personagem</h2><label for="level">Nível atual</label><input id="level" type="number" min="1" max="700" value="120"><label for="fruit">Fruta</label><select id="fruit"><option>Smoke</option><option>Light</option><option>Flame</option><option>Ice</option><option>Outra</option></select><label for="style">Estilo de luta</label><select id="style"><option>Combat</option><option>Dark Step</option><option>Electric</option><option>Water Kung Fu</option><option>Outro</option></select><button id="plan">Montar meu plano</button><div class="small">O progresso fica salvo neste navegador.</div></section>
-<section class="card"><h2>Meta principal</h2><div class="result" id="goal">Chegar ao nível 700</div><div id="remaining">Faltam 580 níveis.</div><div class="meter"><span id="bar"></span></div><p class="small">O Segundo Mar é liberado no nível 700. O plano é uma orientação; confirme os requisitos das missões no jogo.</p></section>
-<section class="card" style="grid-column:1/-1"><h2>Plano recomendado</h2><div class="route" id="route"><div class="step"><b>Primeiro Mar</b>Informe seu nível e toque em “Montar meu plano”.</div></div></section>
-</div><footer>Ferramenta independente de acompanhamento. Não é afiliada à Roblox. Não automatiza ações, não coleta senha, cookie ou token. Jogue de forma justa e faça pausas.</footer>
+<section class="card">
+<h2>Seu progresso</h2>
+<label for="level">Nível atual</label><input id="level" type="number" min="1" max="700" value="120" inputmode="numeric">
+<label for="beli">Beli que você tem agora</label><input id="beli" type="number" min="0" step="1" value="0" inputmode="numeric">
+<label for="goal">Meta de Beli</label><input id="goal" type="number" min="1" step="1" value="100000" inputmode="numeric">
+<button id="save">Salvar progresso</button>
+<p class="small">Atualize os valores depois de jogar. O painel salva neste navegador.</p>
+</section>
+<section class="card">
+<h2>Metas principais</h2>
+<div class="stats">
+<div class="stat"><strong id="levelLeft">580</strong><span>níveis até 700</span></div>
+<div class="stat"><strong id="beliLeft">100.000</strong><span>Beli que faltam</span></div>
+</div>
+<label>Progresso até o nível 700</label><div class="meter"><span id="xpBar"></span></div>
+<label>Progresso da meta de Beli</label><div class="meter"><span id="beliBar"></span></div>
+<p class="small" id="status">Continue fazendo missões para ganhar XP e Beli juntos.</p>
+</section>
+<section class="card full">
+<h2>Missão indicada para seu nível</h2>
+<div class="route" id="currentQuest"></div>
+</section>
+<section class="card full">
+<h2>Rota de farm: Primeiro Mar</h2>
+<div class="route" id="route"></div>
+</section>
+<section class="card full">
+<h2>Como aproveitar melhor cada sessão</h2>
+<div class="route">
+<div class="step"><b>1. Pegue uma missão antes de lutar</b>As missões dão XP e Beli ao serem concluídas. Priorize inimigos que contam para a missão ativa.</div>
+<div class="step"><b>2. Fique na faixa do seu nível</b>Quando liberar uma missão de nível maior e conseguir derrotar os inimigos sem muita demora, avance para ela.</div>
+<div class="step"><b>3. Aproveite chefes quando estiverem disponíveis</b>Missões de chefe podem pagar mais Beli e XP, mas só vale insistir se você conseguir derrotá-lo com eficiência.</div>
+<div class="step"><b>4. Registre seus resultados</b>Depois da sessão, atualize seu nível e seu Beli atual para ver quanto falta para cada meta.</div>
+</div>
+</section>
+<section class="card full">
+<div class="notice">O SYNEX é um guia e rastreador. Ele não controla o Roblox, não coleta dados da sua conta e não faz farm automático. Recompensas e requisitos podem mudar com atualizações do jogo.</div>
+</section>
+</div>
+<footer>Ferramenta independente, sem vínculo com a Roblox. Seu progresso fica salvo apenas neste navegador.</footer>
 </main>
 <script>
 const $=id=>document.getElementById(id);
-const routes=[{max:9,title:"Starter Island",task:"Complete as missões iniciais."},{max:19,title:"Jungle",task:"Faça as missões da Jungle."},{max:29,title:"Pirate Village",task:"Siga as missões da Pirate Village."},{max:59,title:"Desert",task:"Avance pelas missões do Desert."},{max:99,title:"Frozen Village",task:"Use as missões da Frozen Village."},{max:149,title:"Marine Fortress / Skylands",task:"Escolha missões compatíveis com seu nível."},{max:199,title:"Prison / Skylands",task:"Continue nas missões disponíveis."},{max:249,title:"Colosseum",task:"Faça as missões adequadas ao seu nível."},{max:299,title:"Magma Village",task:"Progrida nas missões de Magma Village."},{max:374,title:"Underwater City",task:"Avance pelas missões da Underwater City."},{max:449,title:"Upper Skylands",task:"Continue pelas missões das ilhas superiores."},{max:524,title:"Fountain City",task:"Complete as missões disponíveis."},{max:624,title:"First Sea — reta final",task:"Siga as missões de maior nível liberadas."},{max:699,title:"Preparação para o Segundo Mar",task:"Chegue ao nível 700 e confira os requisitos de acesso."},{max:700,title:"Segundo Mar desbloqueado",task:"No nível 700, procure o NPC indicado para iniciar o acesso ao Segundo Mar."}];
-function render(){let n=Math.max(1,Math.min(700,Number($("level").value)||1));$("level").value=n;$("remaining").textContent=n>=700?"Meta alcançada! Você chegou ao nível 700.":"Faltam "+(700-n)+" níveis.";$("bar").style.width=(n/700*100)+"%";let r=routes.find(x=>n<=x.max)||routes[routes.length-1];$("route").innerHTML='<div class="step"><b>Agora: '+r.title+'</b>'+r.task+'</div><div class="step"><b>Próximo marco</b>'+(n<700?"Continue até o próximo marco e atualize seu plano.":"Você alcançou o marco do Segundo Mar.")+'</div><div class="step"><b>Seu equipamento</b>Fruta: '+$("fruit").value+' · Estilo: '+$("style").value+'. Distribua atributos de acordo com seu estilo.</div>';try{localStorage.setItem("synex-bf",JSON.stringify({level:n,fruit:$("fruit").value,style:$("style").value}))}catch(e){}}
-try{let s=JSON.parse(localStorage.getItem("synex-bf")||"null");if(s){$("level").value=s.level||120;$("fruit").value=s.fruit||"Smoke";$("style").value=s.style||"Combat"}}catch(e){}
-$("plan").addEventListener("click",render);$("level").addEventListener("change",render);$("fruit").addEventListener("change",render);$("style").addEventListener("change",render);render();
-</script><!-- SYNEX Pages deployment check -->
+const fmt=n=>Math.max(0,Math.floor(Number(n)||0)).toLocaleString('pt-BR');
+const quests=[
+{min:120,max:129,island:'Marine Fortress',name:'Chief Petty Officer',xp:'225.000',beli:'6.000',note:'Missão disponível a partir do nível 120.'},
+{min:130,max:149,island:'Marine Fortress',name:'Vice Admiral (chefe)',xp:'415.000',beli:'15.000',note:'Missão de chefe; tente quando conseguir derrotá-lo sem perder muito tempo.'},
+{min:150,max:174,island:'Skylands',name:'Sky Bandit',xp:'315.000',beli:'7.000',note:'Avance para Skylands ao atingir o nível 150.'},
+{min:175,max:189,island:'Skylands',name:'Dark Master',xp:'450.000',beli:'7.500',note:'Missão liberada no nível 175.'},
+{min:190,max:209,island:'Prison',name:'Prisoner',xp:'550.000',beli:'7.000',note:'Missão liberada no nível 190.'},
+{min:210,max:224,island:'Prison',name:'Dangerous Prisoner',xp:'780.000',beli:'7.500',note:'Missão liberada no nível 210.'},
+{min:225,max:229,island:'Prison',name:'Ruthless Prisoner',xp:'900.000',beli:'8.000',note:'Missão liberada no nível 225.'},
+{min:230,max:249,island:'Prison',name:'Warden (chefe)',xp:'1.000.000',beli:'10.000',note:'Missão de chefe liberada no nível 230.'},
+{min:250,max:274,island:'Colosseum',name:'Toga Warrior',xp:'1.100.000',beli:'7.000',note:'Missão liberada no nível 250.'},
+{min:275,max:299,island:'Colosseum',name:'Gladiator',xp:'1.300.000',beli:'7.500',note:'Missão liberada no nível 275.'},
+{min:300,max:324,island:'Magma Village',name:'Military Soldier',xp:'1.700.000',beli:'8.250',note:'Missão liberada no nível 300.'},
+{min:325,max:349,island:'Magma Village',name:'Military Spy',xp:'2.000.000',beli:'8.500',note:'Missão liberada no nível 325.'},
+{min:350,max:374,island:'Magma Village',name:'Magma General (chefe)',xp:'3.000.000',beli:'15.000',note:'Missão de chefe liberada no nível 350.'},
+{min:375,max:399,island:'Underwater City',name:'Fishman Warrior',xp:'3.050.000',beli:'8.750',note:'Missão liberada no nível 375.'},
+{min:400,max:424,island:'Underwater City',name:'Fishman Commando',xp:'3.350.000',beli:'9.000',note:'Missão liberada no nível 400.'},
+{min:425,max:449,island:'Underwater City',name:'Fishman Lord / inimigos da área',xp:'—',beli:'—',note:'Confira a missão disponível no NPC da ilha.'},
+{min:450,max:624,island:'Upper Skylands',name:'Missões da área',xp:'—',beli:'—',note:'Suba pelas missões compatíveis com seu nível e confira o próximo NPC da ilha.'},
+{min:625,max:649,island:'Fountain City',name:'Galley Pirate',xp:'7.500.000',beli:'10.000',note:'Missão liberada no nível 625.'},
+{min:650,max:674,island:'Fountain City',name:'Galley Captain',xp:'8.500.000',beli:'10.000',note:'Missão liberada no nível 650.'},
+{min:675,max:699,island:'Fountain City',name:'Cyborg (chefe)',xp:'10.000.000',beli:'20.000',note:'Missão de chefe liberada no nível 675.'}
+];
+const routeBands=[
+['120–149','Marine Fortress','Chief Petty Officer; depois Vice Admiral no nível 130.'],
+['150–189','Skylands','Sky Bandit; depois Dark Master no nível 175.'],
+['190–249','Prison','Prisoner, Dangerous Prisoner, Ruthless Prisoner e Warden.'],
+['250–299','Colosseum','Toga Warrior; depois Gladiator.'],
+['300–374','Magma Village','Military Soldier, Military Spy e Magma General.'],
+['375–449','Underwater City','Fishman Warrior e Fishman Commando; confira o NPC para a próxima missão.'],
+['450–624','Upper Skylands','Continue pelas missões adequadas ao seu nível.'],
+['625–699','Fountain City','Galley Pirate, Galley Captain e Cyborg.']
+];
+function render(){
+let level=Math.max(1,Math.min(700,Math.floor(Number($('level').value)||1)));
+let beli=Math.max(0,Math.floor(Number($('beli').value)||0));
+let goal=Math.max(1,Math.floor(Number($('goal').value)||1));
+$('level').value=level;$('beli').value=beli;$('goal').value=goal;
+$('levelLeft').textContent=fmt(700-level);
+$('beliLeft').textContent=fmt(Math.max(0,goal-beli));
+$('xpBar').style.width=(level/700*100)+'%';
+$('beliBar').style.width=(Math.min(100,beli/goal*100))+'%';
+$('status').textContent=level>=700?'Meta de nível alcançada! Confira os requisitos do Segundo Mar no jogo.':beli>=goal?'Meta de Beli alcançada! Você pode definir uma nova meta.':'Faça missões para ganhar XP e Beli na mesma atividade.';
+let q=quests.find(x=>level>=x.min&&level<=x.max);
+if(!q){q=level<120?{island:'Rota inicial',name:'Siga as missões da ilha correspondente ao seu nível',xp:'—',beli:'—',note:'O roteiro detalhado deste painel começa no nível 120.'}:{island:'Segundo Mar',name:'Primeiro Mar concluído',xp:'—',beli:'—',note:'Você chegou ao nível 700.'};}
+$('currentQuest').innerHTML='<div class="step"><span class="pill">Nível '+level+'</span><span class="pill">'+q.island+'</span><b>'+q.name+'</b><div class="reward">Recompensa por missão: '+q.xp+' XP · '+q.beli+' Beli</div><div class="small">'+q.note+'</div></div><div class="step"><b>Seu foco</b>Conclua a missão ativa, receba XP e Beli, depois atualize seu nível e seu saldo aqui.</div>';
+$('route').innerHTML=routeBands.map(b=>'<div class="step"><span class="pill">Níveis '+b[0]+'</span><b>'+b[1]+'</b><div class="small">'+b[2]+'</div></div>').join('');
+try{localStorage.setItem('synex-bf-progress',JSON.stringify({level,beli,goal}));}catch(e){}
+}
+try{const s=JSON.parse(localStorage.getItem('synex-bf-progress')||'null');if(s){$('level').value=s.level??120;$('beli').value=s.beli??0;$('goal').value=s.goal??100000;}}catch(e){}
+$('save').addEventListener('click',render);
+['level','beli','goal'].forEach(id=>$(id).addEventListener('change',render));
+render();
+</script>
 </body></html>
