@@ -117,7 +117,7 @@ $('beliBar').style.width=(Math.min(100,beli/goal*100))+'%';
 $('status').textContent=level>=700?'Meta de nível alcançada! Confira os requisitos do Segundo Mar no jogo.':beli>=goal?'Meta de Beli alcançada! Você pode definir uma nova meta.':'Faça missões para ganhar XP e Beli na mesma atividade.';
 let q=quests.find(x=>level>=x.min&&level<=x.max);
 if(!q){q=level<120?{island:'Rota inicial',name:'Siga as missões da ilha correspondente ao seu nível',xp:'—',beli:'—',note:'O roteiro detalhado deste painel começa no nível 120.'}:{island:'Segundo Mar',name:'Primeiro Mar concluído',xp:'—',beli:'—',note:'Você chegou ao nível 700.'};}
-$('currentQuest').innerHTML='<div class="step"><span class="pill">Nível '+level+'</span><span class="pill">'+q.island+'</span><b>'+q.name+'</b><div class="reward">Recompensa por missão: '+q.xp+' XP · '+q.beli+' Beli</div><div class="small">'+q.note+'</div></div><div class="step"><b>Seu foco</b>Conclua a missão ativa, receba XP e Beli, depois atualize seu nível e seu saldo aqui.</div>';
+$('currentQuest').innerHTML='<div class="step"><span class="pill">Nível '+level+'</span><span class="pill">'+q.island+'</span><b>'+q.name+'</b><div class="reward">Recompensa: confira XP e Beli exibidos no NPC/jogo</div><div class="small">'+q.note+'</div></div><div class="step"><b>Seu foco</b>Conclua a missão ativa, receba XP e Beli, depois atualize seu nível e seu saldo aqui.</div>';
 $('route').innerHTML=routeBands.map(b=>'<div class="step"><span class="pill">Níveis '+b[0]+'</span><b>'+b[1]+'</b><div class="small">'+b[2]+'</div></div>').join('');
 try{localStorage.setItem('synex-bf-progress',JSON.stringify({level,beli,goal}));}catch(e){}
 }
