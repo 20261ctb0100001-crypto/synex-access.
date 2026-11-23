@@ -17,4 +17,5 @@ const routes=[{max:9,title:"Starter Island",task:"Complete as missões iniciais.
 function render(){let n=Math.max(1,Math.min(700,Number($("level").value)||1));$("level").value=n;$("remaining").textContent=n>=700?"Meta alcançada! Você chegou ao nível 700.":"Faltam "+(700-n)+" níveis.";$("bar").style.width=(n/700*100)+"%";let r=routes.find(x=>n<=x.max)||routes[routes.length-1];$("route").innerHTML='<div class="step"><b>Agora: '+r.title+'</b>'+r.task+'</div><div class="step"><b>Próximo marco</b>'+(n<700?"Continue até o próximo marco e atualize seu plano.":"Você alcançou o marco do Segundo Mar.")+'</div><div class="step"><b>Seu equipamento</b>Fruta: '+$("fruit").value+' · Estilo: '+$("style").value+'. Distribua atributos de acordo com seu estilo.</div>';try{localStorage.setItem("synex-bf",JSON.stringify({level:n,fruit:$("fruit").value,style:$("style").value}))}catch(e){}}
 try{let s=JSON.parse(localStorage.getItem("synex-bf")||"null");if(s){$("level").value=s.level||120;$("fruit").value=s.fruit||"Smoke";$("style").value=s.style||"Combat"}}catch(e){}
 $("plan").addEventListener("click",render);$("level").addEventListener("change",render);$("fruit").addEventListener("change",render);$("style").addEventListener("change",render);render();
-</script></body></html>
+</script><!-- SYNEX Pages deployment check -->
+</body></html>
