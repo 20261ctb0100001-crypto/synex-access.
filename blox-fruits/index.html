@@ -55,6 +55,26 @@ footer{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
 <h2>Rota de farm: Primeiro Mar</h2>
 <div class="route" id="route"></div>
 </section>
+<section class="card full" id="automationCard">
+<h2>Central de autorização</h2>
+<p class="small">Inicie uma sessão com sua autorização. O SYNEX abre o Roblox e mantém um cronômetro para você registrar seu progresso. Ele não lê os dados do jogo nem controla seu personagem.</p>
+<div class="stats">
+<div class="stat"><strong id="automationStatus">Parado</strong><span>Status da sessão</span></div>
+<div class="stat"><strong id="automationTime">00:00:00</strong><span>Tempo acompanhado</span></div>
+</div>
+<button id="requestAuthorization">Iniciar acompanhamento</button>
+<button id="stopAutomation" class="secondary" disabled>Parar acompanhamento</button>
+<p class="small" id="automationMessage" aria-live="polite">Nenhuma sessão em andamento.</p>
+</section>
+<div id="authorizationDialog" role="dialog" aria-modal="true" aria-labelledby="authorizationTitle" hidden style="position:fixed;inset:0;z-index:20;background:#000b;display:none;align-items:center;justify-content:center;padding:18px">
+<div class="card" style="width:min(100%,430px);box-shadow:0 20px 70px #000">
+<h2 id="authorizationTitle">Autorizar tarefa do SYNEX?</h2>
+<p class="small">O SYNEX solicita permissão para:</p>
+<ul class="small"><li>Abrir a página oficial do Blox Fruits.</li><li>Iniciar um cronômetro de acompanhamento nesta página.</li><li>Permitir que você registre manualmente seus ganhos de Beli e níveis.</li></ul>
+<p class="small">Não há leitura automática da conta, controle do personagem ou farm automático.</p>
+<button id="authorizeAutomation">Autorizar e abrir Roblox</button>
+<button id="cancelAuthorization" class="secondary">Cancelar</button>
+</div></div>
 <section class="card full">
 <h2>Conectar ao Roblox</h2>
 <p class="small">Abra a página oficial de Blox Fruits. Se o Roblox estiver instalado, o Android poderá oferecer a opção de abrir no aplicativo. O SYNEX não acessa sua conta nem controla o personagem.</p>
@@ -145,6 +165,31 @@ try{const s=JSON.parse(localStorage.getItem('synex-bf-progress')||'null');if(s){
 $('save').addEventListener('click',render);
 ['level','beli','goal'].forEach(id=>$(id).addEventListener('change',render));
 render();
+let automationStartedAt=0,automationInterval=null;
+const authDialog=$('authorizationDialog');
+$('requestAuthorization').addEventListener('click',()=>{authDialog.hidden=false;authDialog.style.display='flex';});
+$('cancelAuthorization').addEventListener('click',()=>{authDialog.hidden=true;authDialog.style.display='none';});
+$('authorizeAutomation').addEventListener('click',()=>{
+ authDialog.hidden=true;authDialog.style.display='none';
+ if(automationInterval)clearInterval(automationInterval);
+ automationStartedAt=Date.now();
+ $('automationStatus').textContent='Ativo';
+ $('automationMessage').textContent='Acompanhamento iniciado. Atualize Beli e nível manualmente após jogar.';
+ $('requestAuthorization').disabled=true;
+ $('stopAutomation').disabled=false;
+ const tick=()=>{const sec=Math.floor((Date.now()-automationStartedAt)/1000);$('automationTime').textContent=[Math.floor(sec/3600),Math.floor(sec%3600/60),sec%60].map(n=>String(n).padStart(2,'0')).join(':');};
+ tick();automationInterval=setInterval(tick,1000);
+ const win=window.open('https://www.roblox.com/games/2753915549/Blox-Fruits','_blank','noopener');
+ if(!win)$('automationMessage').textContent='Acompanhamento iniciado. O navegador bloqueou a nova aba; use o botão Abrir Blox Fruits abaixo.';
+});
+$('stopAutomation').addEventListener('click',()=>{
+ if(automationInterval)clearInterval(automationInterval);
+ automationInterval=null;
+ $('automationStatus').textContent='Parado';
+ $('automationMessage').textContent='Acompanhamento encerrado. Confira seu progresso e registre a sessão abaixo.';
+ $('requestAuthorization').disabled=false;
+ $('stopAutomation').disabled=true;
+});
 let sessionHistory=[];try{sessionHistory=JSON.parse(localStorage.getItem('synex-bf-sessions')||'[]');if(!Array.isArray(sessionHistory))sessionHistory=[];}catch(e){sessionHistory=[];}
 function showHistory(){const el=$('history');el.innerHTML=sessionHistory.length?sessionHistory.slice().reverse().map((s,i)=>'<div class="step"><b>Sessão '+(sessionHistory.length-i)+'</b><div class="small">'+s.date+'</div><div class="reward">+'+fmt(s.beli)+' Beli · +'+fmt(s.levels)+' níveis</div></div>').join(''):'<div class="step small">Nenhuma sessão registrada.</div>';}
 $('recordSession').addEventListener('click',()=>{const b0=Math.max(0,Number($('startBeli').value)||0),b1=Math.max(0,Number($('endBeli').value)||0);const l0=Math.max(1,Math.min(700,Number($('startLevel').value)||1)),l1=Math.max(1,Math.min(700,Number($('endLevel').value)||1));const gained=Math.max(0,b1-b0),levels=Math.max(0,l1-l0);$('sessionBeli').textContent=fmt(gained);$('sessionLevels').textContent=fmt(levels);$('beli').value=b1;$('level').value=l1;render();sessionHistory.push({date:new Date().toLocaleString('pt-BR'),beli:gained,levels});try{localStorage.setItem('synex-bf-sessions',JSON.stringify(sessionHistory));}catch(e){}showHistory();});
