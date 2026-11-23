@@ -56,6 +56,20 @@ footer{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
 <div class="route" id="route"></div>
 </section>
 <section class="card full">
+<h2>Registrar uma sessão de farm</h2>
+<div class="grid">
+<div><label for="startBeli">Beli antes</label><input id="startBeli" type="number" min="0" value="0"></div>
+<div><label for="endBeli">Beli depois</label><input id="endBeli" type="number" min="0" value="0"></div>
+<div><label for="startLevel">Nível antes</label><input id="startLevel" type="number" min="1" max="700" value="120"></div>
+<div><label for="endLevel">Nível depois</label><input id="endLevel" type="number" min="1" max="700" value="120"></div>
+</div>
+<button id="recordSession">Registrar sessão</button>
+<div class="stats" style="margin-top:12px"><div class="stat"><strong id="sessionBeli">0</strong><span>Beli ganhos</span></div><div class="stat"><strong id="sessionLevels">0</strong><span>níveis avançados</span></div></div>
+<p class="small">Digite os valores que aparecem no Roblox antes e depois de jogar. O SYNEX calcula a diferença e guarda o histórico neste navegador.</p>
+<h2 style="margin-top:18px">Histórico</h2><div class="route" id="history"><div class="step small">Nenhuma sessão registrada.</div></div>
+<button class="secondary" id="clearHistory">Limpar histórico</button>
+</section>
+<section class="card full">
 <h2>Como aproveitar melhor cada sessão</h2>
 <div class="route">
 <div class="step"><b>1. Pegue uma missão antes de lutar</b>As missões dão XP e Beli ao serem concluídas. Priorize inimigos que contam para a missão ativa.</div>
@@ -125,5 +139,9 @@ try{const s=JSON.parse(localStorage.getItem('synex-bf-progress')||'null');if(s){
 $('save').addEventListener('click',render);
 ['level','beli','goal'].forEach(id=>$(id).addEventListener('change',render));
 render();
+let sessionHistory=[];try{sessionHistory=JSON.parse(localStorage.getItem('synex-bf-sessions')||'[]');if(!Array.isArray(sessionHistory))sessionHistory=[];}catch(e){sessionHistory=[];}
+function showHistory(){const el=$('history');el.innerHTML=sessionHistory.length?sessionHistory.slice().reverse().map((s,i)=>'<div class="step"><b>Sessão '+(sessionHistory.length-i)+'</b><div class="small">'+s.date+'</div><div class="reward">+'+fmt(s.beli)+' Beli · +'+fmt(s.levels)+' níveis</div></div>').join(''):'<div class="step small">Nenhuma sessão registrada.</div>';}
+$('recordSession').addEventListener('click',()=>{const b0=Math.max(0,Number($('startBeli').value)||0),b1=Math.max(0,Number($('endBeli').value)||0);const l0=Math.max(1,Math.min(700,Number($('startLevel').value)||1)),l1=Math.max(1,Math.min(700,Number($('endLevel').value)||1));const gained=Math.max(0,b1-b0),levels=Math.max(0,l1-l0);$('sessionBeli').textContent=fmt(gained);$('sessionLevels').textContent=fmt(levels);$('beli').value=b1;$('level').value=l1;render();sessionHistory.push({date:new Date().toLocaleString('pt-BR'),beli:gained,levels});try{localStorage.setItem('synex-bf-sessions',JSON.stringify(sessionHistory));}catch(e){}showHistory();});
+$('clearHistory').addEventListener('click',()=>{sessionHistory=[];try{localStorage.removeItem('synex-bf-sessions');}catch(e){}showHistory();});showHistory();
 </script>
 </body></html>
